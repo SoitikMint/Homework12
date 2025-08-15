@@ -52,6 +52,10 @@ public class TodosTest {
         Task[] expected = {epic};
         Task[] actual = todos.search("Молоко");
         Assertions.assertArrayEquals(expected, actual);
+
+        Task[] expected_2 = {};
+        Task[] actual_2 = todos.search("Вода");
+        Assertions.assertArrayEquals(expected_2, actual_2);
     }
 
     @Test
@@ -145,6 +149,56 @@ public class TodosTest {
 
         String expected = "Во вторник после обеда";
         String actual = meeting.getStart();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldMatchesTask() {
+        Task task = new Task(1);
+
+        boolean expected = false;
+        boolean actual = task.matches("a");
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldEqualsTask() {
+        Task task = new Task(2);
+        Task task2 = task;
+        Task task3 = new Task(2);
+        SimpleTask task_4 = new SimpleTask(33, "Посмотреть фильм");
+
+
+        boolean expected = true;
+        boolean actual = task.equals(task2);
+
+        Assertions.assertEquals(expected, actual);
+
+        boolean expected_2 = false;
+        boolean actual_2 = task.equals(null);
+
+        Assertions.assertEquals(expected_2, actual_2);
+
+        boolean expected_3 = true;
+        boolean actual_3 = task.equals(task3);
+
+        Assertions.assertEquals(expected_3, actual_3);
+
+        boolean expected_4 = false;
+        boolean actual_4 = task.equals(task_4);
+
+        Assertions.assertEquals(expected_4, actual_4);
+    }
+
+    @Test
+    public void shouldHashTask() {
+        Task task = new Task(2);
+        Task task2 = new Task(2);
+
+        int expected = task2.hashCode();
+        int actual = task.hashCode();
 
         Assertions.assertEquals(expected, actual);
     }
